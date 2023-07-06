@@ -1,4 +1,5 @@
 from Computation import *
+import os
 
 def add_product():
     product_name = input("Enter product name: ")
@@ -12,6 +13,10 @@ def add_product():
 
     quantity = int(input("Enter quantity: "))
     sold = int(input("Enter sold: "))
+
+    if not os.path.exists("products.txt"):
+        with open("products.txt", "w"):
+            pass
 
     with open("products.txt", "r") as file:
         lines = file.readlines()
@@ -37,33 +42,38 @@ def add_product():
 def display_products():
     with open("products.txt", "r") as file:
         products = file.readlines()
-
+        print("===================================================")
+        print("DISPLAY PRODUCT")
         if not products:
             print("No products found.")
         else:
-            print("Product Name\tBrand\tCost\tPrice\tQuantity\tSold")
+            print("============================================================================")
+            print("{:<20} {:<15} {:<10} {:<10} {:<10} {:<10}".format("Product Name", "Brand", "Cost", "Price", "Quantity", "Sold"))
+            print("----------------------------------------------------------------------------")
             for product in products:
                 product_data = product.strip().split(",")
-                print(
-                    f"{product_data[0]}\t{product_data[1]}\t{product_data[2]}\t{product_data[3]}\t{product_data[4]}\t{product_data[5]}"
-                )
+                print("{:<20} {:<15} {:<10.2f} {:<10.2f} {:<10} {:<10}".format(product_data[0], product_data[1], float(product_data[2]), float(product_data[3]), product_data[4], product_data[5]))
+            print("=============================================================================")
 
 
 def update_product():
+    display_products()
+    print("===================================================")
     product_name = input("Enter the product name to update: ")
-    new_quantity = int(input("Enter the new quantity: "))
-    new_sold = int(input("Enter the new sold quantity: "))
 
     with open("products.txt", "r") as file:
         lines = file.readlines()
 
-    updated_lines = []
     found = False
 
     for line in lines:
         product_data = line.strip().split(",")
         if product_data[0] == product_name:
+            found = True
             quantity = int(product_data[4])
+            new_quantity = int(input("Enter the new quantity: "))
+            new_sold = int(input("Enter the new sold quantity: "))
+
             if new_sold > new_quantity:
                 print("Sold quantity cannot exceed the available quantity.")
                 return
@@ -80,18 +90,24 @@ def update_product():
 
             product_data[4] = str(new_quantity)
             product_data[5] = str(new_sold)
-            found = True
-        updated_line = ",".join(product_data)
-        updated_lines.append(updated_line + "\n")
 
-    if found:
-        with open("products.txt", "w") as file:
-            file.writelines(updated_lines)
-        print("Product updated successfully!")
-    else:
+            updated_line = ",".join(product_data)
+            updated_lines = [updated_line + "\n" if l == line else l for l in lines]
+
+            with open("products.txt", "w") as file:
+                file.writelines(updated_lines)
+
+            print("Product updated successfully!")
+            break
+
+    if not found:
         print("Product not found.")
+        new_product_name = input("Enter the name of the product to update: ")
+        if new_product_name != "":
+            update_product(new_product_name)
 
 def analytics():
+    display_products()
     with open("products.txt", "r") as file:
         products = [line.strip().split(",") for line in file.readlines()]
 
@@ -103,10 +119,13 @@ def analytics():
     total_profit = compute_profit(products)
     best_selling_product = compute_best_selling_product(products)
 
+    print("===================================================")
     print("Analytics:")
     print("Total Revenue:", total_revenue)
     print("Total Profit:", total_profit)
+    print("===================================================")
     if best_selling_product:
         print("Best Selling Product:", best_selling_product[0])
     else:
         print("Best Selling Product: None")
+
