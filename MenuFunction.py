@@ -1,6 +1,8 @@
 from Computation import *
 import os
 
+def cls():
+    print("\n"*50)
 def load_key():
     if os.path.exists("textkey.txt"):
         with open("textkey.txt", "r") as file:
@@ -66,18 +68,20 @@ def retrieve_products(key):
     return products
 
 def add_product():
-    product_name = input("Enter product name: ")
-    brand = input("Enter brand: ")
-    product_cost = float(input("Enter product cost: "))
-    selling_price = float(input("Enter selling price: "))
+    cls()
+    print("=====================================")
+    product_name = input("|\tEnter product name: ")
+    brand = input("|\tEnter brand: ")
+    product_cost = float(input("|\tEnter product cost: "))
+    selling_price = float(input("|\tEnter selling price: "))
 
     if selling_price < product_cost:
         print("Selling price cannot be lower than the cost.")
         return
 
-    quantity = int(input("Enter quantity: "))
-    sold = int(input("Enter sold: "))
-
+    quantity = int(input("|\tEnter quantity: "))
+    sold = int(input("|\tEnter sold: "))
+    print("=====================================")
     key = load_key()
     products = retrieve_products(key)
 
@@ -96,8 +100,10 @@ def add_product():
     save_products(products, key)
 
     print("Product added successfully!")
+    cls()
 
 def display_products():
+    cls()
     key = load_key()
     products = retrieve_products(key)
     choice = 0
@@ -178,6 +184,7 @@ def update_product():
             save_products(products, key)
 
             print("Product updated successfully!")
+            cls()
             break
 
     if not found:
@@ -185,8 +192,10 @@ def update_product():
         new_product_name = input("Enter the name of the product to update: ")
         if new_product_name != "":
             update_product(new_product_name)
+    cls()
 
 def analytics():
+    cls()
     key = load_key()
     products = retrieve_products(key)
 
@@ -203,21 +212,34 @@ def analytics():
     total_expenses = compute_total_expenses(products)
     average_margin = compute_average_profit_margin(products)
     print("===================================================")
-    print("Analytics:")
+    print("\t\t\t\tANALYTICS")
+    print("===================================================")
     print("Total Revenue:", total_revenue)
     print("Total expenses:", total_expenses)
     print("Total Profit:", total_profit)
     print("Total sold:", total_sold)
-    print("Average Profit Margin: {:.2f}%".format(average_price))
+    print("Average Price: {:.2f}%".format(average_price))
     print(f"Profit percentage:", round(profit_percentage, 2), "%")
+    print("Average Profit Margin: {:.2f}%".format(average_margin))
     print("===================================================")
     if best_selling_product:
         print("Best Selling Product:", best_selling_product[0])
+        print("===================================================")
     else:
         print("Best Selling Product: None")
+        print("===================================================")
+    cls()
+
 
 def Menu_selection():
     while True:
+        cls()
+        print("███████╗███████╗██╗     ██╗     ██╗███████╗██╗   ██╗    ")
+        print("██╔════╝██╔════╝██║     ██║     ██║██╔════╝╚██╗ ██╔╝    ")
+        print("███████╗█████╗  ██║     ██║     ██║█████╗   ╚████╔╝     ")
+        print("╚════██║██╔══╝  ██║     ██║     ██║██╔══╝    ╚██╔╝      ")
+        print("███████║███████╗███████╗███████╗██║██║        ██║       ")
+        print("╚══════╝╚══════╝╚══════╝╚══════╝╚═╝╚═╝        ╚═╝       ")
         print("+=================================================+")
         print("|            1. Add Product                       |")
         print("|            2. Display Products                  |")
@@ -230,6 +252,7 @@ def Menu_selection():
 
         if choice == "1":
             add_product()
+
         elif choice == "2":
             display_products()
         elif choice == "3":
