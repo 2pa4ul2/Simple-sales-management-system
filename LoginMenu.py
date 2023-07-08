@@ -1,6 +1,6 @@
 from cryptography.fernet import Fernet
 import os
-from Menu import *
+from MenuFunction import *
 
 def LoginMenu():
     while True:
@@ -18,7 +18,7 @@ def LoginMenu():
             register_instance = Registration()
             register_instance.run()
         elif choice == "3":
-            break
+            exit()
         else:
             print("Invalid choice. Please try again.")
 
