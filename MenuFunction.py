@@ -24,7 +24,7 @@ def load_key():
 def encrypt(text, key):
     encrypted_text = bytearray()
     for char in text:
-        encrypted_char = (char + key) % 256  # Modulus 256 to wrap around ASCII values
+        encrypted_char = (char + key) % 256  # Modulus 256 to encrypt with ascii value
         encrypted_text.append(encrypted_char)
     return encrypted_text
 
@@ -32,7 +32,7 @@ def encrypt(text, key):
 def decrypt(encrypted_text, key):
     decrypted_text = bytearray()
     for char in encrypted_text:
-        decrypted_char = (char - key) % 256  # Modulus 256 to wrap around ASCII values
+        decrypted_char = (char - key) % 256
         decrypted_text.append(decrypted_char)
     return decrypted_text
 

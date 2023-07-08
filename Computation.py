@@ -89,6 +89,5 @@ def compute_average_profit_margin(products):
         average_margin = 0
     return average_margin
 
-# Add other computation functions as needed
 
 
