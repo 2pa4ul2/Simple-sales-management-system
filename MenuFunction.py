@@ -17,7 +17,18 @@ def load_key():
             file.write(str(key))
     return key
 
+def change_key():
+    old_key = load_key()
+    print("Old Key:", old_key)
+    new_key = int(input("Enter the new encryption/decryption key: "))
 
+    products = retrieve_products(old_key)
+    save_products(products, new_key)
+
+    with open("textkey.txt", "w") as file:
+        file.write(str(new_key))
+
+    print("Key changed successfully!")
 # Caesar cipher encryption
 def encrypt(text, key):
     encrypted_text = bytearray()
@@ -89,18 +100,48 @@ def add_product():
 def display_products():
     key = load_key()
     products = retrieve_products(key)
-
+    choice = 0
     print("===================================================")
     print("DISPLAY PRODUCT")
     if not products:
         print("No products found.")
     else:
-        print("============================================================================")
-        print("{:<20} {:<15} {:<10} {:<10} {:<10} {:<10}".format("Product Name", "Brand", "Cost", "Price", "Quantity", "Sold"))
-        print("----------------------------------------------------------------------------")
-        for product_data in products:
-            print("{:<20} {:<15} {:<10.2f} {:<10.2f} {:<10} {:<10}".format(product_data[0], product_data[1], float(product_data[2]), float(product_data[3]), product_data[4], product_data[5]))
-        print("=============================================================================")
+            print("+=================================================+")
+            print("|            1. Ascending                         |")
+            print("|            2. Descending                        |")
+            print("|            3. Quit                              |")
+            print("+=================================================+")
+            choice = input("Enter your choice (1-6): ")
+            if choice == '1':
+                sorted_products = sorted(products, key=lambda x: x[0].lower())  # Sort by product name (x[0])
+                print("============================================================================")
+                print("{:<20} {:<15} {:<10} {:<10} {:<10} {:<10}".format("Product Name", "Brand", "Cost", "Price",
+                                                                         "Quantity", "Sold"))
+                print("----------------------------------------------------------------------------")
+                for product_data in sorted_products:
+                    print("{:<20} {:<15} {:<10.2f} {:<10.2f} {:<10} {:<10}".format(product_data[0], product_data[1],
+                                                                                   float(product_data[2]),
+                                                                                   float(product_data[3]),
+                                                                                   product_data[4], product_data[5]))
+                print("=============================================================================")
+            elif choice == '2':
+                sorted_products = sorted(products, key=lambda x: x[0].lower(),
+                                         reverse=True)  # Sort by product name (x[0])
+                print("============================================================================")
+                print("{:<20} {:<15} {:<10} {:<10} {:<10} {:<10}".format("Product Name", "Brand", "Cost", "Price",
+                                                                         "Quantity", "Sold"))
+                print("----------------------------------------------------------------------------")
+                for product_data in sorted_products:
+                    print("{:<20} {:<15} {:<10.2f} {:<10.2f} {:<10} {:<10}".format(product_data[0], product_data[1],
+                                                                                   float(product_data[2]),
+                                                                                   float(product_data[3]),
+                                                                                   product_data[4], product_data[5]))
+                print("=============================================================================")
+            elif choice == '3':
+                exit()
+            else:
+                return
+
 
 def update_product():
     key = load_key()
@@ -145,20 +186,6 @@ def update_product():
         if new_product_name != "":
             update_product(new_product_name)
 
-
-def change_key():
-    old_key = load_key()
-    print("Old Key:", old_key)
-    new_key = int(input("Enter the new encryption/decryption key: "))
-
-    products = retrieve_products(old_key)
-    save_products(products, new_key)
-
-    with open("textkey.txt", "w") as file:
-        file.write(str(new_key))
-
-    print("Key changed successfully!")
-
 def analytics():
     key = load_key()
     products = retrieve_products(key)
@@ -196,7 +223,7 @@ def Menu_selection():
         print("|            2. Display Products                  |")
         print("|            3. Update Product                    |")
         print("|            4. Analytics                         |")
-        print("|            5. Change Key                         |")
+        print("|            5. Change Key                        |")
         print("|            6. Quit                              |")
         print("+=================================================+")
         choice = input("Enter your choice (1-6): ")
