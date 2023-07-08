@@ -1,8 +1,6 @@
 from Computation import *
 import os
 
-
-# Function to load the encryption/decryption key
 def load_key():
     if os.path.exists("textkey.txt"):
         with open("textkey.txt", "r") as file:
