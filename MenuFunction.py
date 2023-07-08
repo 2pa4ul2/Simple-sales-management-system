@@ -120,20 +120,21 @@ def update_product():
             quantity = int(product_data[4])
             new_quantity = int(input("Enter the new quantity: "))
             new_sold = int(input("Enter the new sold quantity: "))
+            new_cost = float(input("Enter the new cost: "))
+            new_price = float(input("Enter the new selling price: "))
 
             if new_sold > new_quantity or new_sold > quantity:
                 print("Sold quantity cannot exceed the available quantity.")
                 return
 
-            product_cost = float(product_data[2])
-            selling_price = float(product_data[3])
-
-            if selling_price < product_cost:
+            if new_price < new_cost:
                 print("Selling price cannot be lower than the cost.")
                 return
-
+            product_data[2] = str(new_cost)
+            product_data[3] = str(new_price)
             product_data[4] = str(new_quantity)
             product_data[5] = str(new_sold)
+
 
             save_products(products, key)
 
@@ -145,6 +146,7 @@ def update_product():
         new_product_name = input("Enter the name of the product to update: ")
         if new_product_name != "":
             update_product(new_product_name)
+
 
 def change_key():
     old_key = load_key()
@@ -170,11 +172,19 @@ def analytics():
     total_revenue = compute_total_revenue(products)
     total_profit = compute_profit(products)
     best_selling_product = compute_best_selling_product(products)
-
+    total_sold = compute_total_sold(products)
+    profit_percentage = compute_profit_percentage(products)
+    average_price = compute_average_price(products)
+    total_expenses = compute_total_expenses(products)
+    average_margin = compute_average_profit_margin(products)
     print("===================================================")
     print("Analytics:")
     print("Total Revenue:", total_revenue)
+    print("Total expenses:", total_expenses)
     print("Total Profit:", total_profit)
+    print("Total sold:", total_sold)
+    print("Average Profit Margin: {:.2f}%".format(average_price))
+    print(f"Profit percentage:", round(profit_percentage, 2), "%")
     print("===================================================")
     if best_selling_product:
         print("Best Selling Product:", best_selling_product[0])
