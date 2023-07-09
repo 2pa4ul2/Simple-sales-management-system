@@ -2,7 +2,7 @@ from MenuFunction import *
 from LoginMenu import *
 
 def main():
-    LoginMenu()
+    #LoginMenu()
     Menu_selection()
 
 

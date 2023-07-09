@@ -69,7 +69,9 @@ def retrieve_products(key):
 
 def add_product():
     cls()
-    print("=====================================")
+    print(" ▄▀▄ █▀▄ █▀▄   █▀▄ █▀▄ ▄▀▄ █▀▄ █ █ ▄▀▀ ▀█▀")
+    print(" █▀█ █▄▀ █▄▀   █▀  █▀▄ ▀▄▀ █▄▀ ▀▄█ ▀▄▄  █ ")
+    print("███████████████████████████████████████████████████")
     product_name = input("|\tEnter product name: ")
     brand = input("|\tEnter brand: ")
     product_cost = float(input("|\tEnter product cost: "))
@@ -81,7 +83,7 @@ def add_product():
 
     quantity = int(input("|\tEnter quantity: "))
     sold = int(input("|\tEnter sold: "))
-    print("=====================================")
+    print("███████████████████████████████████████████████████")
     key = load_key()
     products = retrieve_products(key)
 
@@ -107,16 +109,17 @@ def display_products():
     key = load_key()
     products = retrieve_products(key)
     choice = 0
-    print("===================================================")
-    print("DISPLAY PRODUCT")
+    print("███████████████████████████████████████████████████")
+    print(" \t\t\t█▀▄ █ ▄▀▀ █▀▄ █   ▄▀▄ ▀▄▀")
+    print(" \t\t\t█▄▀ █ ▄██ █▀  █▄▄ █▀█  █ ")
     if not products:
         print("No products found.")
     else:
-            print("+=================================================+")
-            print("|            1. Ascending                         |")
-            print("|            2. Descending                        |")
-            print("|            3. Quit                              |")
-            print("+=================================================+")
+            print("███████████████████████████████████████████████████")
+            print("█            1. Ascending                         █")
+            print("█            2. Descending                        █")
+            print("█            3. Quit                              █")
+            print("███████████████████████████████████████████████████")
             choice = input("Enter your choice (1-6): ")
             if choice == '1':
                 sorted_products = sorted(products, key=lambda x: x[0].lower())  # Sort by product name (x[0])
@@ -152,7 +155,10 @@ def display_products():
 def update_product():
     key = load_key()
     display_products()
-    print("===================================================")
+    print("██████████████████████████████████████████████████████")
+    print(" █ █ █▀▄ █▀▄ ▄▀▄ ▀█▀ ██▀   █▀▄ █▀▄ ▄▀▄ █▀▄ █ █ ▄▀▀ ▀█▀")
+    print(" ▀▄█ █▀  █▄▀ █▀█  █  █▄▄   █▀  █▀▄ ▀▄▀ █▄▀ ▀▄█ ▀▄▄  █ ")
+    print("██████████████████████████████████████████████████████")
     product_name = input("Enter the product name to update: ")
 
     products = retrieve_products(key)
@@ -211,9 +217,10 @@ def analytics():
     average_price = compute_average_price(products)
     total_expenses = compute_total_expenses(products)
     average_margin = compute_average_profit_margin(products)
-    print("===================================================")
-    print("\t\t\t\tANALYTICS")
-    print("===================================================")
+    print("███████████████████████████████████████████████████")
+    print(" ▄▀▄ █▄ █ ▄▀▄ █   ▀▄▀ ▀█▀ █ ▄▀▀ ▄▀▀")
+    print(" █▀█ █ ▀█ █▀█ █▄▄  █   █  █ ▀▄▄ ▄██")
+    print("███████████████████████████████████████████████████")
     print("Total Revenue:", total_revenue)
     print("Total expenses:", total_expenses)
     print("Total Profit:", total_profit)
@@ -221,33 +228,32 @@ def analytics():
     print("Average Price: {:.2f}%".format(average_price))
     print(f"Profit percentage:", round(profit_percentage, 2), "%")
     print("Average Profit Margin: {:.2f}%".format(average_margin))
-    print("===================================================")
+    print("███████████████████████████████████████████████████")
     if best_selling_product:
         print("Best Selling Product:", best_selling_product[0])
-        print("===================================================")
+        print("███████████████████████████████████████████████████")
     else:
         print("Best Selling Product: None")
-        print("===================================================")
+        print("███████████████████████████████████████████████████")
     cls()
 
 
 def Menu_selection():
     while True:
-        cls()
         print("███████╗███████╗██╗     ██╗     ██╗███████╗██╗   ██╗    ")
         print("██╔════╝██╔════╝██║     ██║     ██║██╔════╝╚██╗ ██╔╝    ")
         print("███████╗█████╗  ██║     ██║     ██║█████╗   ╚████╔╝     ")
         print("╚════██║██╔══╝  ██║     ██║     ██║██╔══╝    ╚██╔╝      ")
         print("███████║███████╗███████╗███████╗██║██║        ██║       ")
         print("╚══════╝╚══════╝╚══════╝╚══════╝╚═╝╚═╝        ╚═╝       ")
-        print("+=================================================+")
-        print("|            1. Add Product                       |")
-        print("|            2. Display Products                  |")
-        print("|            3. Update Product                    |")
-        print("|            4. Analytics                         |")
-        print("|            5. Change Key                        |")
-        print("|            6. Quit                              |")
-        print("+=================================================+")
+        print("███████████████████████████████████████████████████")
+        print("█            1. Add Product                       █")
+        print("█            2. Display Products                  █")
+        print("█            3. Update Product                    █")
+        print("█            4. Analytics                         █")
+        print("█            5. Change Key                        █")
+        print("█            6. Quit                              █")
+        print("███████████████████████████████████████████████████")
         choice = input("Enter your choice (1-6): ")
 
         if choice == "1":
