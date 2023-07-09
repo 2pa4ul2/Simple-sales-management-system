@@ -1,5 +1,6 @@
 from Computation import *
 import os
+import time
 
 def cls():
     print("\n"*50)
@@ -150,6 +151,8 @@ def display_products():
                 exit()
             else:
                 return
+    time.sleep(10)
+    cls()
 
 
 def update_product():
@@ -180,6 +183,7 @@ def update_product():
 
             if new_price < new_cost:
                 print("Selling price cannot be lower than the cost.")
+                cls()
                 return
             product_data[2] = str(new_cost)
             product_data[3] = str(new_price)
