@@ -4,19 +4,22 @@ import time
 
 def cls():
     print("\n"*50)
+
+
+key_path = "E:/textkey.txt"
 def load_key():
-    if os.path.exists("textkey.txt"):
-        with open("textkey.txt", "r") as file:
+    if os.path.exists(key_path):
+        with open(key_path, "r") as file:
             try:
                 key = int(file.read())
             except ValueError:
                 print("Invalid key format in the key file.")
                 key = int(input("Enter the encryption/decryption key: "))
-                with open("textkey.txt", "w") as file:
+                with open(key_path, "w") as file:
                     file.write(str(key))
     else:
         key = int(input("Enter the encryption/decryption key: "))
-        with open("textkey.txt", "w") as file:
+        with open(key_path, "w") as file:
             file.write(str(key))
     return key
 
@@ -151,6 +154,7 @@ def display_products():
                 exit()
             else:
                 return
+    print(f"Display will close in 10 seconds..... ")
     time.sleep(10)
     cls()
 
